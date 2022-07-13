@@ -1,12 +1,6 @@
--- TOTAL PRICE CALCULATE --
--- STOPPAGE --
--- EMAIL OF CUSTOMER --
--- SEAT TYPE --
-
-
 -- LAB 3
 
-SELECT *   FROM TICKET; 
+SELECT *  FROM TICKET; 
 
 
 SELECT NUMBER_PLATE, COST FROM BUS
@@ -15,7 +9,8 @@ WHERE COST>=500 AND COST<=1000 ;
 
 -- DISTINCT Cost between 500 to 1000
 
-SELECT DISTINCT(COST) AS distinct_cost, NUMBER_PLATE FROM BUS
+SELECT DISTINCT(COST) AS distinct_cost, NUMBER_PLATE 
+FROM BUS
 WHERE COST>=500 AND COST<=1000 ;
 
 -- LIKE (SUB STRING MATCH)--
@@ -30,6 +25,8 @@ WHERE START_POINT LIKE '%LA%';
 SELECT NUMBER_PLATE, COST FROM BUS
 ORDER BY COST DESC;
 
+
+
 -- CALCULTE ALL TICKET PRICE BY COUNT 
 -- AT FIRST GET TICKET PRICE FROM CO-RESPONDING BUS
 
@@ -37,8 +34,25 @@ ORDER BY COST DESC;
 
 
 
--- SELECT MAX COST GROPU BY BUS TYPE --
+-- __QUERY__ : SELECT MAX COST GROPU BY BUS TYPE (AC/NON AC) --
 SELECT MAX(COST), BUS_TYPE
 FROM BUS
 GROUP BY BUS_TYPE;
-------------------------------------
+
+
+-- _________ HAVING  ________ --
+
+-- __QUERY__ : select route id and sum of bus cost on that route where sum of bus cost is greater than 1000 and less then 2000 --
+
+SELECT  ROUTE_ID, SUM(COST) 
+FROM BUS
+GROUP BY ROUTE_ID
+HAVING SUM(COST) > 1000 AND SUM(COST) < 2000;
+
+-- _________ HAVING  ________ --
+-- ___ QUERY ___ : select route ids from bus which has minimum capacity greater than equal 38
+SELECT  ROUTE_ID 
+FROM BUS
+GROUP BY ROUTE_ID 
+HAVING MIN(CAPACITY)  >= 38 ;
+ 
