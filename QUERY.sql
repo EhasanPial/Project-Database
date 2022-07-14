@@ -130,4 +130,31 @@ FROM BUS
 WHERE  CAPACITY > 40  ;
 
 
+-- ________________ NATURAL JOIN QUERY ________________ --
+-- __QUERY__ : Select bus number_plate, start and destination
+SELECT NUMBER_PLATE, START_POINT,DESTINATION
+FROM BUS NATURAL JOIN SCHEDULE;
 
+-- ________________ CROSS JOIN QUERY ________________ --
+-- __QUERY__ : Select tikcet number and customer name
+SELECT TICKET_NUMBER, USER_NAME
+FROM TICKET T CROSS JOIN CUSTOMER C CROSS JOIN USERS U
+WHERE T.CUST_ID = C.CUST_ID AND U.USERS_ID = C.USERS_ID;
+
+
+-- ________________ LEFT OUTER JOIN QUERY ________________ --
+-- __QUERY__ : Select tikcet number and route_id with left outer join
+SELECT  B.NUMBER_PLATE , S.ROUTE_ID, S.START_POINT, S.DESTINATION
+FROM BUS B LEFT OUTER JOIN SCHEDULE S
+ON B.ROUTE_ID = S.ROUTE_ID;
+
+-- ________________ RIGHT OUTER JOIN QUERY ________________ --
+-- __QUERY__ : Select tikcet number and route_id with left outer join
+SELECT  B.NUMBER_PLATE , S.ROUTE_ID, S.START_POINT,S.DESTINATION
+FROM BUS B RIGHT OUTER JOIN SCHEDULE S
+ON B.ROUTE_ID = S.ROUTE_ID;
+
+-- ________________ FULL OUTER JOIN QUERY ________________ --
+SELECT  B.NUMBER_PLATE , S.ROUTE_ID, S.START_POINT, S.DESTINATION
+FROM BUS B FULL OUTER JOIN SCHEDULE S
+ON B.ROUTE_ID = S.ROUTE_ID;
