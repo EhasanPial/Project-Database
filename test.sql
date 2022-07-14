@@ -1,25 +1,3 @@
--- ************************************* TRIGGER ************************************ --
--- TRIGGER when inserting new bus, then give that bus a new driver and conductor
- 
-
-ALTER TABLE TICKET
-    ADD TOTAL_COST INTEGER ; 
-
-CREATE OR REPLACE TRIGGER addNewTicket BEFORE INSERT ON TICKET
-FOR EACH ROW
- 
-
-BEGIN
-    
-    SELECT  B.COST*:NEW.TOTAL_SEAT INTO :NEW.TOTAL_COST
-    FROM BUS B
-    WHERE B.NUMBER_PLATE = :NEW.NUMBER_PLATE;
-
-    SELECT MAX(TICKET_NUMBER)+1 INTO :NEW.TICKET_NUMBER
-    FROM TICKET ;
-
-
-END;
-/ 
-SHOW ERRORS;
-INSERT INTO TICKET VALUES(NULL ,3,910,'34 12','RAJSHAHI','KHULNA','04-OCT-2021','12-OCT-2021',91742390,NULL);
+@"C:\Users\ASUS\Desktop\Project Database\1.Create_Table.sql"
+@"C:\Users\ASUS\Desktop\Project Database\DATA_INSERT.SQL"
+@"C:\Users\ASUS\Desktop\Project Database\QUERY.sql"

@@ -260,6 +260,8 @@ BEGIN
 END;
 
 / 
+
+ 
 -- ************************************* TRIGGER ************************************ --
 -- TRIGGER when inserting new ticket calculte ticket_number and total cost;
 
@@ -268,6 +270,8 @@ ALTER TABLE TICKET
 
  ALTER TABLE TICKET
     ADD TOTAL_COST INTEGER ; 
+
+
 
 CREATE OR REPLACE TRIGGER addNewTicket BEFORE INSERT ON TICKET
 FOR EACH ROW
@@ -287,3 +291,22 @@ END;
 / 
 SHOW ERRORS;
 INSERT INTO TICKET VALUES(NULL ,3,910,'34 12','RAJSHAHI','KHULNA','04-OCT-2021','12-OCT-2021',91742390,NULL);
+
+
+SELECT * FROM TICKET;
+ROLLBACK;
+ 
+
+ 
+
+
+
+-- ************************************* DATE ************************************ --
+--  
+
+SELECT TICKET_NUMBER
+FROM TICKET
+WHERE JOURNEY_DATE-BOOKING_DATE <=1 ;
+
+SELECT EXTRACT(YEAR FROM JOURNEY_DATE) AS JOURNEY_YEAR
+FROM TICKET;
