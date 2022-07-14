@@ -88,3 +88,46 @@ WHERE C.PHONE IN (
     FROM CUSTOMER C, TICKET T
     WHERE C.CUST_ID = T.CUST_ID AND T.START_POINT = 'DHAKA'
 );
+
+-- ________________ UNION (DISTINCT) QUERY ________________ --
+-- __QUERY__ : Select distinct bus and route_id where capacity > 40 or capacity less then 40 
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY < 40  
+UNION
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY > 40  ;
+
+-- ________________ UNION ALL (DISTINCT) QUERY ________________ --
+-- __QUERY__ : Select all bus and route_id where capacity > 40 or capacity less then 40 
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY < 40  
+UNION ALL
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY > 40  ;
+
+-- ________________ INTERSECT QUERY ________________ --
+-- __QUERY__ : Select bus and route_id where capacity > 40 AND capacity less then 40 
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY < 40  
+INTERSECT
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY > 40  ;
+
+-- ________________ MINUS QUERY ________________ --
+-- __QUERY__ : Select bus and route_id where capacity > 40 minus capacity less then 40 
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY < 40  
+MINUS
+SELECT BUS_TYPE, ROUTE_ID
+FROM BUS
+WHERE  CAPACITY > 40  ;
+
+
+
