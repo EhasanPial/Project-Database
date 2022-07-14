@@ -1,19 +1,25 @@
-SET SERVEROUTPUT ON
-CREATE OR REPLACE FUNCTION getUserName (
-      custid IN CUSTOMER.CUST_ID%TYPE
-) RETURN USERS.USER_NAME%TYPE  IS
+-- ************************************* TRIGGER ************************************ --
+-- TRIGGER when inserting new bus, then give that bus a new driver and conductor
+ 
 
-    userName USERS.USER_NAME%TYPE;
-    BEGIN
-        SELECT USER_NAME INTO userName
-        FROM USERS JOIN CUSTOMER
-        ON CUSTOMER.CUST_ID = custid
-        AND CUSTOMER.USERS_ID = USERS.USERS_ID;
-        RETURN userName;
-    END getUserName;
-/
-SHOW errors;
+ALTER TABLE TICKET
+    ADD TOTAL_COST INTEGER ; 
+
+CREATE OR REPLACE TRIGGER addNewTicket BEFORE INSERT ON TICKET
+FOR EACH ROW
+ 
+
 BEGIN
-    DBMS_OUTPUT.PUT_LINE('User name is: ' || getUserName(&custid)) ;
+    
+    SELECT  B.COST*:NEW.TOTAL_SEAT INTO :NEW.TOTAL_COST
+    FROM BUS B
+    WHERE B.NUMBER_PLATE = :NEW.NUMBER_PLATE;
+
+    SELECT MAX(TICKET_NUMBER)+1 INTO :NEW.TICKET_NUMBER
+    FROM TICKET ;
+
+
 END;
-/
+/ 
+SHOW ERRORS;
+INSERT INTO TICKET VALUES(NULL ,3,910,'34 12','RAJSHAHI','KHULNA','04-OCT-2021','12-OCT-2021',91742390,NULL);

@@ -1,4 +1,4 @@
-
+SET LINESIZE 200;
 ---------------------------------- Data Insert ----------------------------------------
 ------- USER TABLE DATA INSERT ------------ 
 INSERT INTO USERS VALUES(1,'bdf1@gmail.com',777,'bdf1');
