@@ -158,3 +158,41 @@ ON B.ROUTE_ID = S.ROUTE_ID;
 SELECT  B.NUMBER_PLATE , S.ROUTE_ID, S.START_POINT, S.DESTINATION
 FROM BUS B FULL OUTER JOIN SCHEDULE S
 ON B.ROUTE_ID = S.ROUTE_ID;
+
+
+
+-- ________________ PL SQL  ________________ --
+-- __QUERY__ : find total cost of ticket number 1007
+SET SERVEROUTPUT ON
+DECLARE
+
+seats TICKET.TOTAL_SEAT%TYPE; 
+cost BUS.COST%TYPE;
+BEGIN
+
+ 
+SELECT TICKET.TOTAL_SEAT, BUS.COST INTO seats,cost
+FROM BUS NATURAL JOIN TICKET
+WHERE TICKET.TICKET_NUMBER = 1007 ;
+DBMS_OUTPUT.PUT_LINE('Total Cost: '||cost*seats) ;
+END;
+
+/
+
+
+-- ________________ PL SQL  ________________ --
+-- __QUERY__ : find Maximum total ticket price of all sold tickets
+SET SERVEROUTPUT ON
+DECLARE
+seats TICKET.TOTAL_SEAT%TYPE; 
+cost BUS.COST%TYPE;
+BEGIN
+
+ 
+SELECT MAX(TICKET.TOTAL_SEAT*BUS.COST) INTO cost
+FROM BUS NATURAL JOIN TICKET;
+
+DBMS_OUTPUT.PUT_LINE('Total Cost: '||cost) ;
+END;
+
+/
