@@ -1,0 +1,19 @@
+SET SERVEROUTPUT ON
+CREATE OR REPLACE FUNCTION getUserName (
+      custid IN CUSTOMER.CUST_ID%TYPE
+) RETURN USERS.USER_NAME%TYPE  IS
+
+    userName USERS.USER_NAME%TYPE;
+    BEGIN
+        SELECT USER_NAME INTO userName
+        FROM USERS JOIN CUSTOMER
+        ON CUSTOMER.CUST_ID = custid
+        AND CUSTOMER.USERS_ID = USERS.USERS_ID;
+        RETURN userName;
+    END getUserName;
+/
+SHOW errors;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('User name is: ' || getUserName(&custid)) ;
+END;
+/
